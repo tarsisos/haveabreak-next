@@ -5,6 +5,7 @@ import { Profile } from '../components/Profile'
 import { Countdown } from '../components/Countdown'
 import { ChallengeBox } from '../components/ChallengeBox'
 import { ExperienceBar } from '../components/ExperienceBar'
+import { CountdownProvider } from '../contexts/CountdownContext'
 import { CompletedChallenges } from '../components/CompletedChallenges'
 
 export default function Home() {
@@ -14,20 +15,21 @@ export default function Home() {
         <title>Início | Have a Break</title>
       </Head>
       <ExperienceBar />
+      <CountdownProvider>
+        <section>
+          
+          <div>
+            <Profile />
+            <CompletedChallenges />
+            <Countdown />
+          </div>
 
-      <section>
-        
-        <div>
-          <Profile />
-          <CompletedChallenges />
-          <Countdown />
-        </div>
+          <div>
+            <ChallengeBox />
+          </div>
 
-        <div>
-          <ChallengeBox />
-        </div>
-
-      </section>
+        </section>
+      </CountdownProvider>
     </div>
   )
 }
