@@ -6,8 +6,8 @@ interface CountdownContextData {
   seconds: number;
   hasFinished: boolean;
   isActive: boolean;
-  startCountdown: ()=> void;
-  resetCountdown: ()=> void;
+  startCountdown: () => void;
+  resetCountdown: () => void;
 }
 
 interface CountdownProviderProps {
@@ -18,26 +18,26 @@ export const CountdownContext = createContext({} as CountdownContextData)
 
 let countdownTimeout: NodeJS.Timeout;
 
-export function CountdownProvider({children}: CountdownProviderProps) {
-  const {startNewChallenge } = useContext(ChallengesContext);
-  
+export function CountdownProvider({ children }: CountdownProviderProps) {
+  const { startNewChallenge } = useContext(ChallengesContext);
 
-  const [time, setTime] = useState(0.1*60);
+
+  const [time, setTime] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
   const [hasFinished, setHasFinished] = useState(false);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
-  
-  function startCountdown(){
+
+  function startCountdown() {
     setIsActive(true);
   }
 
-  function resetCountdown(){
+  function resetCountdown() {
     clearTimeout(countdownTimeout);
     setIsActive(false);
     setHasFinished(false);
-    setTime (0.1 * 60);
+    setTime(25 * 60);
   }
 
   //useEffect(() => {executa uma função}, [quando um valor mudar])
@@ -45,9 +45,9 @@ export function CountdownProvider({children}: CountdownProviderProps) {
   useEffect(() => {
     if (isActive && time > 0) {
       countdownTimeout = setTimeout(() => { //setTimeout = acontece depois de um tempo
-        setTime(time-1)
+        setTime(time - 1)
       }, 1000)// um segundo
-    } else if(isActive && time == 0){
+    } else if (isActive && time == 0) {
       setHasFinished(true);
       setIsActive(false);
       startNewChallenge();
